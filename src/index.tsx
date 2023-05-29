@@ -4,6 +4,11 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import Root from "./Root";
 
+if (process.env.NODE_ENV === "development") {
+  const { worker } = require("./mocks/browser");
+  worker.start({ onUnhandledRequest: "bypass" });
+}
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
