@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { SignIn } from "./components";
+import { Home, SignIn } from "./components";
 import { BaseLayout } from "./layouts";
 import { getToken, removeToken, saveToken } from "./service/store";
 import { createContext, useEffect, useMemo, useState } from "react";
@@ -31,7 +31,15 @@ function App() {
     <UserContext.Provider value={value}>
       <Routes>
         <Route element={<BaseLayout />}>
+          {user?.token
+            ? <>
+              <Route index element={<Home />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </>
+            : <>
               <Route path="/sign-in" element={<SignIn />} />
+              <Route path="*" element={<Navigate to="/sign-in" replace />} />
+            </>}
         </Route>
       </Routes>
     </UserContext.Provider>
