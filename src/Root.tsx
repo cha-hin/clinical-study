@@ -1,6 +1,6 @@
 import { MantineProvider } from "@mantine/core";
 import App from "./App";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { CustomFonts } from "./CustomFonts";
 
 const glassyStyle = {
@@ -90,10 +90,10 @@ function Root() {
         })
       }}
     >
-      <BrowserRouter>
+      <HashRouter>
         <CustomFonts />
         <App />
-      </BrowserRouter>
+      </HashRouter>
     </MantineProvider>
   )
 }

@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Home, SignIn } from "./components";
 import { BaseLayout } from "./layouts";
 import { getToken, removeToken, saveToken } from "./service/store";
