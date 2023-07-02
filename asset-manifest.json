@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/clinical-study/static/css/main.f5221b1c.css",
+    "main.js": "/clinical-study/static/js/main.a9304daa.js",
+    "static/js/787.eeedf2bd.chunk.js": "/clinical-study/static/js/787.eeedf2bd.chunk.js",
+    "static/media/inter.woff2": "/clinical-study/static/media/inter.25c0352e0e349c007d36.woff2",
+    "static/media/background.svg": "/clinical-study/static/media/background.45ec9635cb7deddc572d8947c8909c40.svg",
+    "index.html": "/clinical-study/index.html",
+    "main.f5221b1c.css.map": "/clinical-study/static/css/main.f5221b1c.css.map",
+    "main.a9304daa.js.map": "/clinical-study/static/js/main.a9304daa.js.map",
+    "787.eeedf2bd.chunk.js.map": "/clinical-study/static/js/787.eeedf2bd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f5221b1c.css",
+    "static/js/main.a9304daa.js"
+  ]
+}
