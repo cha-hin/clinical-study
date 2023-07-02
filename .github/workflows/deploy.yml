@@ -1,44 +1,6 @@
-# Simple workflow for deploying static content to GitHub Pages
-# name: Deploy static content to Pages
-
-# on:
-#   # Runs on pushes targeting the default branch
-#   push:
-#     branches: ["main"]
-
-#   # Allows you to run this workflow manually from the Actions tab
-#   workflow_dispatch:
-
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-#     name: Build app
-#     steps: 
-#       - name: git-checkout
-#         uses: actions/checkout@v2
-
-#       - name: Set up Node.js
-#         uses: actions/setup-node@v3
-#         with:
-#           node-version: ${{ env.NODE_VERSION }}
-
-#       - name: yarn install and build
-#         run: |
-#           yarn install
-#           yarn build
-
-#       - name: Deploy with gh-pages
-#         run: |
-#           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-#           yarn deploy -u "github-actions-bot <support+actions@github.com>"
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+name: Deploy app to pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
   workflow_dispatch:
@@ -48,12 +10,9 @@ permissions:
   pages: write
   id-token: write
 
-  # Allows you to run this workflow manually from the Actions tab
-
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Build app
     steps: 
       - name: git-checkout
         uses: actions/checkout@v3
@@ -75,7 +34,6 @@ jobs:
           path: ./build
           key: ${{ github.sha }}
 
-  # Single deploy job since we're just deploying
   deploy:
     needs: build
     environment:
