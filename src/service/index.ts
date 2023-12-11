@@ -1,13 +1,12 @@
 import { useContext } from "react";
 import { useHttp } from "./http";
 import { HttpMutators } from "./http-mutators";
-import { UserContext } from "src/App";
-
+import { UserContext } from "../App";
 
 export type SignInPayload = {
   email: string;
   password: string;
-}
+};
 
 export const useService = () => {
   const http = useHttp();
@@ -18,5 +17,5 @@ export const useService = () => {
       http.post(mutators, { url: "/login", payload }),
     getData: (mutators: HttpMutators) =>
       http.get(mutators, { url: `/user/${user?.token}/data` }),
-  }
-}
+  };
+};

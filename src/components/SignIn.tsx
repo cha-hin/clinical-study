@@ -1,10 +1,20 @@
-import { ThemeIcon, Alert, Button, Paper, PasswordInput, Stack, TextInput, Title, useMantineTheme } from "@mantine/core";
+import {
+  ThemeIcon,
+  Alert,
+  Button,
+  Paper,
+  PasswordInput,
+  Stack,
+  TextInput,
+  Title,
+  useMantineTheme,
+} from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useContext, useRef, useState } from "react";
 import { HiEye, HiEyeOff, HiLockClosed, HiMail } from "react-icons/hi";
 import { MdError } from "react-icons/md";
-import { UserContext } from "src/App";
-import { SignInPayload, useService } from "src/service";
+import { UserContext } from "../App";
+import { SignInPayload, useService } from "../service";
 
 function SignIn() {
   const { signIn } = useService();
@@ -21,9 +31,15 @@ function SignIn() {
       password: "",
     },
     validate: {
-      email: value => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value) ? null : "Invalid email",
-      password: value => /([^\s])/.test(value) ? null : "Password is empty"
-    }
+      email: (value) =>
+        // eslint-disable-next-line no-useless-escape
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+          value,
+        )
+          ? null
+          : "Invalid email",
+      password: (value) => (/([^\s])/.test(value) ? null : "Password is empty"),
+    },
   });
 
   function handleSubmit() {
@@ -32,29 +48,30 @@ function SignIn() {
     if (form.isValid()) {
       signIn(
         {
-          loading: value => setLoading(value),
-          success: res => {
+          loading: (value) => setLoading(value),
+          success: (res) => {
             setUser({ ...user, token: res.token });
           },
-          error: err => setErrorMessage(err?.message)
+          error: (err) => setErrorMessage(err?.message),
         },
         {
           email: form.values.email,
-          password: form.values.password
-        });
+          password: form.values.password,
+        },
+      );
     }
   }
 
   return (
     <Stack ref={ref}>
       <Paper>
-        <form onSubmit={form.onSubmit(values => handleSubmit())}>
+        <form onSubmit={form.onSubmit(() => handleSubmit())}>
           <Stack>
             <Title order={2}>Sign in</Title>
             <TextInput
               withAsterisk
               label="Email"
-              icon={<HiMail />}
+              leftSection={<HiMail />}
               aria-label="Email"
               aria-required="true"
               autoComplete="on"
@@ -65,28 +82,45 @@ function SignIn() {
             <PasswordInput
               withAsterisk
               label="Password"
-              icon={<HiLockClosed />}
+              leftSection={<HiLockClosed />}
               aria-label={"Password"}
               aria-required="true"
               placeholder="Enter password"
               autoComplete="on"
-              visibilityToggleIcon={({ reveal, size }) =>
-                reveal
-                  ? <HiEyeOff size={size} color={theme.colors.gray[5]} />
-                  : <HiEye size={size} color={theme.colors.gray[5]} />
+              visibilityToggleIcon={({ reveal }) =>
+                reveal ? (
+                  <HiEyeOff color={theme.colors.gray[5]} />
+                ) : (
+                  <HiEye color={theme.colors.gray[5]} />
+                )
               }
               {...form.getInputProps("password")}
             />
-            <Button loading={loading} ml="auto" type="submit" disabled={!form.isValid()}>Sign in</Button>
+            <Button
+              loading={loading}
+              ml="auto"
+              type="submit"
+              disabled={!form.isValid()}
+            >
+              Sign in
+            </Button>
           </Stack>
         </form>
       </Paper>
-      {errorMessage && !form.isTouched() && <Alert color="red" icon={<ThemeIcon color="red" variant="subtle" radius="md" size="lg" p={3}><MdError size="2rem" /></ThemeIcon>}>
-        {errorMessage}
-      </Alert>}
-    </Stack >
-  )
+      {errorMessage && !form.isTouched() && (
+        <Alert
+          color="red"
+          icon={
+            <ThemeIcon color="red" variant="subtle" radius="md" size="lg" p={3}>
+              <MdError size="2rem" />
+            </ThemeIcon>
+          }
+        >
+          {errorMessage}
+        </Alert>
+      )}
+    </Stack>
+  );
 }
 
 export default SignIn;
-

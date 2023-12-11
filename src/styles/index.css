@@ -1,0 +1,5 @@
+@import "fonts";
+@import "@mantine/core/styles.css";
+body {
+  overflow-x: hidden;
+}

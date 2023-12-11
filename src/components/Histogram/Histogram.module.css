@@ -1,0 +1,24 @@
+.axis {
+  font-size: 13;
+  font-weight: bold;
+}
+
+.axis * {
+  font-size: 10;
+  font-weight: bold;
+}
+
+.tooltip {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: var(--mantine-spacing-xs);
+  border-radius: var(--mantine-radius-md);
+  opacity: 0;
+  transform: scale(0.9);
+  font-size: var(--mantine-font-size-sm);
+  transition-property: transform, opacity, top, left;
+  transition-duration: 150ms;
+  transform-origin: bottom center;
+  white-space: nowrap;
+}

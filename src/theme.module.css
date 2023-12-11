@@ -1,0 +1,20 @@
+.input {
+  transition:
+    background-color 200ms ease,
+    outline 200ms ease,
+    color 200ms ease,
+    box-shadow 200ms ease;
+  outline: none;
+  background-color: #f3f3f4;
+  &:hover {
+    background-color: #fff;
+    /* box-shadow: 0 0 0 4px rgba(var(--mantine-primary-color-filled), 0.3); */
+    box-shadow: 0 0 0 4px
+      color-mix(in srgb, var(--mantine-primary-color-filled) 30%, transparent);
+  }
+  &:focus-within {
+    background-color: #fff;
+    box-shadow: 0 0 0 4px
+      color-mix(in srgb, var(--mantine-primary-color-filled) 30%, transparent);
+  }
+}
